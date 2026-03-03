@@ -92,7 +92,7 @@ class ErrorMonitorApiConfig {
   Map<String, String> get resolvedHeaders => {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        ?'X-Api-Key': apiKey,
+        if (apiKey != null) 'X-Api-Key': apiKey!,
         ...?headers,
       };
 }

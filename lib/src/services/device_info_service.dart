@@ -190,7 +190,7 @@ class DeviceInfoService {
       // capture path. We surface the type only; callers can extend this.
       return _NetworkData(type: type, speedMbps: 0.0);
     } catch (_) {
-      return _NetworkData(type: 'Unknown', speedMbps: 0.0);
+      return const _NetworkData(type: 'Unknown', speedMbps: 0.0);
     }
   }
 
@@ -252,7 +252,7 @@ class DeviceInfoService {
     } catch (_) {
       // Storage info unavailable.
     }
-    return _StorageData(totalGB: 0.0, freeGB: 0.0);
+    return const _StorageData(totalGB: 0.0, freeGB: 0.0);
   }
 
   int _parseKbLine(String line) {
