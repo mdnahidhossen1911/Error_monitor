@@ -1,3 +1,20 @@
+## 1.1.0
+
+### Added
+- `allowBadCertificates` option in `ErrorMonitorApiConfig` for localhost / dev server testing.
+- Self-signed TLS certificate support via `HttpClient.badCertificateCallback`.
+- Debug-mode logging for `SocketException`, `HandshakeException`, and HTTP errors with actionable tips.
+- `INTERNET` permission in Android plugin manifest.
+- Example app (`example/lib/main.dart`) with full feature demo.
+- Localhost / Development Setup section in README.
+
+### Fixed
+- Renamed console header from `ERROR TRACKER` to `ERROR MONITOR`.
+- Renamed offline queue prefix from `et_queue_` to `em_queue_`.
+- Updated `CrashReport` doc comment (removed Firebase reference).
+- Updated iOS and macOS podspec metadata (version, summary, author, homepage).
+- Added author name to LICENSE.
+
 ## 1.0.0
 
 Initial stable release.

@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'error_monitor'
-  s.version          = '1.0.0'
+  s.version          = '1.1.0'
   s.summary          = 'Production-ready crash tracking for Flutter. Zero Firebase dependency.'
   s.description      = <<-DESC
 Ship crash reports to any REST API with offline queue, breadcrumbs,
