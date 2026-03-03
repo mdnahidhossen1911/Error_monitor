@@ -1,0 +1,44 @@
+name: error_monitor
+description: "A new Flutter project."
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ^3.10.4
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  device_info_plus: ^10.1.0
+  connectivity_plus: ^6.0.3
+  battery_plus: ^6.0.1
+  shared_preferences: ^2.3.3
+  uuid: 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  mockito: ^5.4.4
+  build_runner: ^2.4.9
+
+
+flutter:
+
+  plugin:
+    platforms:
+      android:
+        package: com.example.error_monitor
+        pluginClass: ErrorMonitorPlugin
+      ios:
+        pluginClass: ErrorMonitorPlugin
+      linux:
+        pluginClass: ErrorMonitorPlugin
+      macos:
+        pluginClass: ErrorMonitorPlugin
+      windows:
+        pluginClass: ErrorMonitorPluginCApi
+
+
