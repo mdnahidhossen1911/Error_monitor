@@ -2,7 +2,7 @@ import '../models/crash_report.dart';
 import '../models/error_level.dart';
 import '../models/error_record.dart';
 
-/// Configuration for [ErrorMonitor.runApp] / [ErrorMonitor.init].
+/// Configuration for `ErrorMonitor.runApp` / `ErrorMonitor.init`.
 ///
 /// Minimal setup (console-only):
 /// ```dart

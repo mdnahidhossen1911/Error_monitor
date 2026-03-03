@@ -60,8 +60,7 @@ Replace your `main()` with a single call — **no API key needed** for local log
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:error_monitor/src/tracker/error_monitor.dart';
-import 'package:error_monitor/src/tracker/error_monitor_config.dart';
+import 'package:error_monitor/error_monitor.dart';
 
 void main() => ErrorMonitor.runApp(
   config: ErrorMonitorConfig(
@@ -83,8 +82,7 @@ Send crash reports to your own REST API:
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:error_monitor/src/tracker/error_monitor.dart';
-import 'package:error_monitor/src/tracker/error_monitor_config.dart';
+import 'package:error_monitor/error_monitor.dart';
 
 void main() => ErrorMonitor.runApp(
   config: ErrorMonitorConfig(
@@ -455,8 +453,6 @@ lib/
 ```dart
 import 'package:flutter/material.dart';
 import 'package:error_monitor/error_monitor.dart';
-import 'package:error_monitor/src/tracker/error_monitor.dart';
-import 'package:error_monitor/src/tracker/error_monitor_config.dart';
 
 void main() => ErrorMonitor.runApp(
   config: ErrorMonitorConfig(

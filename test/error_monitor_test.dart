@@ -1,7 +1,6 @@
 
 import 'package:error_monitor/error_monitor.dart';
 import 'package:error_monitor/src/logger/console_logger.dart';
-import 'package:error_monitor/src/tracker/error_monitor_config.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // ---------------------------------------------------------------------------

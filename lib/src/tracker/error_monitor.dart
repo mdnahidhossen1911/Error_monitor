@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -431,7 +430,7 @@ class ErrorMonitor {
 
       // 4. Send to REST API (or queue if offline) — only if configured
       if (_reporter != null) {
-        await _reporter!.send(report);
+        await _reporter.send(report);
       }
 
       // 5. Developer callback hook (optional custom sink)
