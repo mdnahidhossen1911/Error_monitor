@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// SharedPreferences. Each report gets its own key so partial
 /// failures during flush don't corrupt the queue.
 class OfflineQueue {
-  static const String _prefix = 'et_queue_';
+  static const String _prefix = 'em_queue_';
   static const int _maxQueueSize = 100;
 
   /// Persists a serialized crash report.

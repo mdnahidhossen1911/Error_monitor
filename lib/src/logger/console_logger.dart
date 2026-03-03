@@ -14,7 +14,7 @@ class ConsoleLogger {
   const ConsoleLogger();
 
   static const _divider = '===============================================';
-  static const _header = '================ ERROR TRACKER ================';
+  static const _header = '=============== ERROR MONITOR ================';
 
   /// Formats and prints [record] to the console.
   void log(ErrorRecord record) {

@@ -106,6 +106,63 @@ void main() => ErrorMonitor.runApp(
 
 ---
 
+## 🔧 Localhost / Development Setup
+
+Testing against a local server? Follow these steps:
+
+### 1. Use the correct host address
+
+| Platform | Use instead of `localhost` |
+|---|---|
+| **Android Emulator** | `10.0.2.2` |
+| **iOS Simulator** | `localhost` (works directly) |
+| **Physical Device** | Your machine's LAN IP (e.g., `192.168.1.x`) |
+
+### 2. Enable cleartext HTTP traffic (Android)
+
+Android blocks HTTP (non-HTTPS) by default. Add this to your **app's** `android/app/src/main/AndroidManifest.xml`:
+
+```xml
+<application
+    android:usesCleartextTraffic="true"
+    ...>
+```
+
+### 3. Configure the API endpoint
+
+```dart
+void main() => ErrorMonitor.runApp(
+  config: ErrorMonitorConfig(
+    appName: 'MyApp',
+    appVersion: '1.0.0',
+    buildNumber: '1',
+    apiConfig: ErrorMonitorApiConfig(
+      // Android emulator → use 10.0.2.2
+      endpoint: 'http://10.0.2.2:3000/api/crashes',
+      // For HTTPS with self-signed certs:
+      allowBadCertificates: true, // ⚠️ dev only!
+    ),
+  ),
+  app: const MyApp(),
+);
+```
+
+### 4. iOS — allow local networking (if needed)
+
+Add to your `ios/Runner/Info.plist`:
+
+```xml
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsLocalNetworking</key>
+    <true/>
+</dict>
+```
+
+> **⚠️ Warning:** Never use `allowBadCertificates: true` or `usesCleartextTraffic="true"` in production builds!
+
+---
+
 ## 🏗️ How It Works
 
 ### 3 Automatic Capture Layers
@@ -294,6 +351,7 @@ ErrorMonitorConfig(
 | `headers` | `Map<String, String>?` | `null` | Additional HTTP headers |
 | `timeoutSeconds` | `int` | `10` | Request timeout in seconds |
 | `maxRetries` | `int` | `3` | Retry attempts before queuing offline |
+| `allowBadCertificates` | `bool` | `false` | Accept self-signed TLS certs (dev only!) |
 
 ### `ErrorLevel`
 

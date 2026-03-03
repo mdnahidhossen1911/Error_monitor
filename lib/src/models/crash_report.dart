@@ -5,7 +5,7 @@ import '../models/error_level.dart';
 import '../models/error_type.dart';
 import '../models/user_info.dart';
 
-/// Full crash report sent to Firebase / remote backend.
+/// Full crash report sent to your remote backend.
 /// Contains everything Crashlytics would capture.
 class CrashReport {
   CrashReport({

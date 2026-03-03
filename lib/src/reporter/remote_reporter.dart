@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 
 import '../models/crash_report.dart';
 import '../queue/offline_queue.dart';
@@ -44,7 +45,18 @@ class RemoteReporter {
   })  : _config = apiConfig,
         _connectivity = connectivity ?? Connectivity(),
         _queue = offlineQueue ?? OfflineQueue(),
-        _http = httpClient ?? HttpClient();
+        _http = httpClient ?? _createHttpClient(apiConfig);
+
+  /// Creates an [HttpClient] that optionally accepts bad certificates
+  /// (self-signed, expired, wrong host) for localhost / dev servers.
+  static HttpClient _createHttpClient(ErrorMonitorApiConfig config) {
+    final client = HttpClient();
+    if (config.allowBadCertificates) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+    }
+    return client;
+  }
 
   final ErrorMonitorApiConfig _config;
   final Connectivity _connectivity;
@@ -107,13 +119,26 @@ class RemoteReporter {
         if (attempt < _config.maxRetries) {
           await Future.delayed(Duration(seconds: 1 << (attempt - 1)));
         }
-      } on SocketException {
+      } on SocketException catch (e) {
         // Network gone mid-flight — queue and stop.
+        if (kDebugMode) {
+          debugPrint('[ErrorMonitor] SocketException: $e');
+          debugPrint('[ErrorMonitor] Tip: On Android emulator use '
+              '10.0.2.2 instead of localhost');
+        }
         break;
-      } on HandshakeException {
+      } on HandshakeException catch (e) {
         // TLS error — queue and stop.
+        if (kDebugMode) {
+          debugPrint('[ErrorMonitor] TLS HandshakeException: $e');
+          debugPrint('[ErrorMonitor] Tip: Set allowBadCertificates: true '
+              'in ErrorMonitorApiConfig for dev servers');
+        }
         break;
-      } catch (_) {
+      } catch (e) {
+        if (kDebugMode) {
+          debugPrint('[ErrorMonitor] HTTP error (attempt $attempt): $e');
+        }
         if (attempt < _config.maxRetries) {
           await Future.delayed(Duration(seconds: attempt));
         }

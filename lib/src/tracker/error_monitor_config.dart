@@ -69,6 +69,7 @@ class ErrorMonitorApiConfig {
     this.headers,
     this.timeoutSeconds = 10,
     this.maxRetries = 3,
+    this.allowBadCertificates = false,
   });
 
   /// Full URL that accepts POST requests with a JSON body.
@@ -87,6 +88,21 @@ class ErrorMonitorApiConfig {
 
   /// How many times to retry a failed request before queuing (default 3).
   final int maxRetries;
+
+  /// Allow self-signed / bad TLS certificates (for localhost / dev servers).
+  /// ⚠️ NEVER set to true in production!
+  ///
+  /// For Android emulator, use `10.0.2.2` instead of `localhost` to reach
+  /// the host machine. For iOS simulator, `localhost` works directly.
+  ///
+  /// Example (development):
+  /// ```dart
+  /// ErrorMonitorApiConfig(
+  ///   endpoint: 'http://10.0.2.2:3000/api/crashes', // Android emulator
+  ///   allowBadCertificates: true,
+  /// )
+  /// ```
+  final bool allowBadCertificates;
 
   /// Builds the resolved header map for an HTTP request.
   Map<String, String> get resolvedHeaders => {
