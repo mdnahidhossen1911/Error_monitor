@@ -202,8 +202,8 @@ class DeviceInfoService {
     try {
       if (Platform.isLinux || Platform.isAndroid) {
         final meminfo = File('/proc/meminfo');
-        if (await meminfo.exists()) {
-          final lines = await meminfo.readAsLines();
+        if (meminfo.existsSync()) {
+          final lines = meminfo.readAsLinesSync();
           for (final line in lines) {
             if (line.startsWith('MemTotal:')) {
               totalRamMB = _parseKbLine(line);

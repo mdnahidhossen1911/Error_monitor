@@ -47,7 +47,7 @@ class BreadcrumbManager {
           data: {
             'method': method,
             'url': url,
-            if (statusCode != null) 'status': statusCode,
+            ?'status': statusCode,
           },
         ),
       );
